@@ -27,13 +27,13 @@
    "spot": "Male3ib",
    "direction": "Male3ib",
    "kind": "trailer",
-   "status": "confirmed",
+   "status": "cleared",
    "reportedAt": 1793594280000,
    "reports": 4,
    "note": "",
    "id": "mvyrr2hy148k",
-   "clearedAt": null
+   "clearedAt": 1793595878837
   }
  ],
- "updatedAt": 1793595839597
+ "updatedAt": 1793595880082
 }
