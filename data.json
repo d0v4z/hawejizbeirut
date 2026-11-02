@@ -3,8 +3,8 @@
   "name": "Hawejiz Beirut",
   "nameAr": "حواجز بيروت",
   "reportNumber": "71 127 767",
-  "whishNumber": "71 127 767",
-  "whishName": "Adnan Chamseddin",
+  "whishNumber": "",
+  "whishName": "",
   "channelLink": "",
   "staleHours": 2,
   "ads": [],
@@ -36,5 +36,5 @@
    "clearedAt": 1793595878837
   }
  ],
- "updatedAt": 1793596289311
+ "updatedAt": 1793596306465
 }
