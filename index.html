@@ -177,6 +177,7 @@ var KINDS = [
 ];
 function hrsAr(h){return h===1?'ساعة':h===2?'ساعتين':h+' ساعات';}
 function daysAr(d){return d===1?'يوم':d===2?'يومين':d+' أيام';}
+function minAr(m){return m===1?'دقيقة':m===2?'دقيقتين':(m<=10?m+' دقايق':m+' دقيقة');}
 function nRepAr(n){return n===2?'بلاغين':n+' بلاغات';}
 var T = {
   ar:{tagline:'تنبيهات حواجز الموتورات ببيروت، لايف',current:'حواجز هلّق',report:'بلّغ',old:'القديم',admin:'الإدارة',follow:'تابعنا',donate:'ادعمنا',langBtn:'English',dark:'الوضع الليلي',light:'الوضع النهاري',loading:'عم يحمّل…',
@@ -239,7 +240,7 @@ function dayLabel(ts){var k=dayKey(ts);if(k===dayKey(Date.now()))return L('today
 function shortDate(ts){try{return new Date(ts).toLocaleDateString(loc(),{day:'numeric',month:'short',timeZone:'Asia/Beirut'});}catch(e){return dayKey(ts);}}
 function ago(ts){
   var m=Math.round((Date.now()-ts)/6e4),h=Math.floor(m/60),d=Math.floor(h/24);
-  if(lang==='ar'){if(m<1)return 'هلّق';if(m<60)return 'من '+m+' دقيقة';if(h<24)return 'من '+hrsAr(h)+(m%60?' و'+(m%60)+' دقيقة':'');return 'من '+daysAr(d);}
+  if(lang==='ar'){if(m<1)return 'هلّق';if(m<60)return 'من '+minAr(m);if(h<24)return 'من '+hrsAr(h)+(m%60?' و'+minAr(m%60):'');return 'من '+daysAr(d);}
   if(m<1)return 'just now';if(m<60)return m+' min ago';if(h<24)return h+' h '+(m%60?m%60+' min ':'')+'ago';return d+(d===1?' day ago':' days ago');
 }
 function staleMs(){return (Number(state.settings.staleHours)||2)*36e5;}
