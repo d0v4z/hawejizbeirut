@@ -3,10 +3,10 @@
   "name": "Hawejiz Beirut",
   "nameAr": "حواجز بيروت",
   "reportNumber": "71 127 767",
-  "whishNumber": "",
-  "whishName": "",
+  "whishNumber": "71 127 767",
+  "whishName": "A.C",
   "channelLink": "https://whatsapp.com/channel/0029Vb94H8I1yT2BLoc5bw1N",
-  "staleHours": 2,
+  "staleHours": 1,
   "ads": [],
   "adPlaceholder": true
  },
@@ -48,5 +48,5 @@
    "clearedAt": 1793595878837
   }
  ],
- "updatedAt": 1793596779826
+ "updatedAt": 1793596900853
 }
