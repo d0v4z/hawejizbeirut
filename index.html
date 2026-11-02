@@ -151,7 +151,7 @@ var GH_OWNER=GH?location.hostname.split('.')[0]:'';
 var GH_REPO=GH?(location.pathname.split('/')[1]||(GH_OWNER+'.github.io')):'';
 var SAVED = JSON.parse(document.getElementById('state').textContent);
 var state = JSON.parse(JSON.stringify(SAVED));
-var DEF = {name:'Hawajiz Beirut',nameAr:'حواجز بيروت',reportNumber:'',whishNumber:'',whishName:'',channelLink:'',staleHours:2,adPlaceholder:true,ads:[]};
+var DEF = {sbUrl:'',sbKey:'',name:'Hawajiz Beirut',nameAr:'حواجز بيروت',reportNumber:'',whishNumber:'',whishName:'',channelLink:'',staleHours:2,adPlaceholder:true,ads:[]};
 function normalize(st){
   st.settings=st.settings||{};st.items=st.items||[];
   var s=st.settings;
@@ -196,7 +196,7 @@ var T = {
     adsTitle:'الإعلانات',adNew:'زيد إعلان',adEditT:'عدّل الإعلان',adTitleL:'عنوان الإعلان',adTextL:'نص الإعلان',adLinkL:'رابط الإعلان',adImgL:'صورة الإعلان',adImgRm:'شيل الصورة',adStart:'بيبلّش بتاريخ',adDays:'المدة (أيام)',adDaysHint:'فاضي = بلا نهاية',adSaveBtn:'احفظ الإعلان',adNeed:'حطّ عنوان أو صورة للإعلان',
     adRunning:'شغّال',adScheduled:'مبرمج',adEnded:'خلص',adPaused:'موقّف',adPause:'وقّف',adResume:'شغّل',adNoEnd:'بلا نهاية',adFrom:'من',adUntil:'لـ',adLeft:function(n){return 'باقي '+daysAr(n);},adNone:'ما في إعلانات. زيد واحد من فوق.',adPh:'فرجي "بدّك تعلن هون؟" إذا ما في إعلان شغّال',adPhSaved:'انحفظ. اكبس نشر.',
     sTitle:'الإعدادات',sName:'اسم الموقع (إنكليزي)',sNameAr:'اسم الموقع (عربي)',sReport:'رقم الواتساب للتبليغات',sWhish:'رقم Whish',sWhishName:'الاسم عـ Whish',sChannel:'رابط قناة الواتساب',sStale:'التنبيه بينزل عالقديم بعد (ساعات)',sApply:'طبّق الإعدادات',sApplied:'انطبّقت. اكبس نشر لتنحفظ.',
-    ghTitle:'ربط GitHub',ghHint:'لتنشر من هون، لازم GitHub token بصلاحية Contents (قراءة وكتابة) على repo الموقع بس. بينحفظ على هالجهاز بس.',ghSave:'احفظ الـ token',ghSaved:'انحفظ الـ token',ghMissing:'حطّ GitHub token تحت لتقدر تنشر.',ghBad:'الـ token غلط أو ما عندو صلاحية عالـ repo.',ghOk:'انحفظ. بيبيّن للناس خلال دقيقة تقريباً.',ghSet:'الـ token محطوط عهالجهاز',ghClear:'شيل الـ token',
+    rSubmit:'ابعت التبليغ',rSending:'عم يبعت…',rThanks:'وصل التبليغ، يسلمو!',rThanksSub:'منتأكّد منو ومننشرو عالموقع والقناة.',rAgain:'بلّغ عن حاجز تاني',rFail:'ما وصل التبليغ. جرّب كمان مرة.',rWait:'استنّى دقيقة قبل ما تبعت تبليغ تاني.',ibTitle:'التبليغات',ibNoSb:'التبليغات عم توصل عالواتساب هلّق. لتوصل لهون، حطّ Supabase URL و anon key بالإعدادات.',ibLogin:'سجّل دخول عـ Supabase لتشوف التبليغات',ibEmail:'الإيميل',ibLoginBtn:'فوت',ibLoginBad:'الإيميل أو كلمة السر غلط',ibRefresh:'حدّث',ibEmpty:'ما في تبليغات جديدة.',ibAdd:'زيد عالحواجز',ibPlus:function(a){return '+1 لـ '+a;},ibFail:'ما قدرنا نجيب التبليغات. جرّب حدّث.',ibAdded:'انزاد. اكبس نشر ليبيّن للناس.',ibDelFail:'ما انمحى التبليغ. جرّب كمان مرة.',sSbUrl:'Supabase URL',sSbKey:'Supabase anon key',sSbHint:'للتبليغات. هيدول مش سرّيين.',ghTitle:'ربط GitHub',ghHint:'لتنشر من هون، لازم GitHub token بصلاحية Contents (قراءة وكتابة) على repo الموقع بس. بينحفظ على هالجهاز بس.',ghSave:'احفظ الـ token',ghSaved:'انحفظ الـ token',ghMissing:'حطّ GitHub token تحت لتقدر تنشر.',ghBad:'الـ token غلط أو ما عندو صلاحية عالـ repo.',ghOk:'انحفظ. بيبيّن للناس خلال دقيقة تقريباً.',ghSet:'الـ token محطوط عهالجهاز',ghClear:'شيل الـ token',
     unsaved:'في تعديلات مش منشورة. الناس بيشوفوها بعد النشر.',publish:'انشر',publishing:'عم ينشر…',published:'انتشر',
     pConflict:'في نسخة أحدث انحفظت قبلك. عم تتحدّث الصفحة، وتعديلاتك بترجع.',pRO:'النشر مش متاح هون. افتح الصفحة من حسابك عـ claude.ai لتحفظ.',pRate:'نشرت كتير بوقت قصير. استنّى دقيقة وجرّب.',pFail:'ما زبط النشر. جرّب كمان شوي.',restored:'رجّعنا تعديلاتك يلّي ما انتشرت'},
   en:{tagline:'Live moto checkpoint alerts, Beirut',current:'Current',report:'Report',old:'Old',admin:'Admin',follow:'Follow',donate:'Donate',langBtn:'عربي',dark:'Dark mode',light:'Light mode',loading:'Loading…',
@@ -215,7 +215,7 @@ var T = {
     adsTitle:'Ads',adNew:'Add ad',adEditT:'Edit ad',adTitleL:'Ad title',adTextL:'Ad text',adLinkL:'Ad link',adImgL:'Ad image',adImgRm:'Remove image',adStart:'Starts on',adDays:'Duration (days)',adDaysHint:'blank = no end',adSaveBtn:'Save ad',adNeed:'Add a title or an image for the ad',
     adRunning:'Running',adScheduled:'Scheduled',adEnded:'Ended',adPaused:'Paused',adPause:'Pause',adResume:'Resume',adNoEnd:'No end',adFrom:'from',adUntil:'until',adLeft:function(n){return n+(n===1?' day left':' days left');},adNone:'No ads yet. Add one above.',adPh:'Show “Advertise here” when no ad is running',adPhSaved:'Saved. Publish to apply.',
     sTitle:'Settings',sName:'Site name (English)',sNameAr:'Site name (Arabic)',sReport:'WhatsApp number for reports',sWhish:'Whish number',sWhishName:'Name on Whish',sChannel:'WhatsApp channel link',sStale:'Move alerts to Old after (hours)',sApply:'Apply settings',sApplied:'Settings applied. Publish to save.',
-    ghTitle:'GitHub connection',ghHint:'To publish from here you need a GitHub token with Contents read and write access to this site’s repo only. It’s kept on this device only.',ghSave:'Save token',ghSaved:'Token saved',ghMissing:'Add a GitHub token below to publish.',ghBad:'The token is wrong or can’t write to the repo.',ghOk:'Saved. Riders see it in about a minute.',ghSet:'A token is saved on this device',ghClear:'Remove token',
+    rSubmit:'Send report',rSending:'Sending…',rThanks:'Report received, thanks!',rThanksSub:'We’ll check it and post it on the site and the channel.',rAgain:'Report another',rFail:'The report didn’t go through. Try again.',rWait:'Wait a minute before sending another report.',ibTitle:'Reports',ibNoSb:'Reports go to WhatsApp for now. To get them here, add your Supabase URL and anon key in Settings.',ibLogin:'Sign in to Supabase to see reports',ibEmail:'Email',ibLoginBtn:'Sign in',ibLoginBad:'Wrong email or password',ibRefresh:'Refresh',ibEmpty:'No new reports.',ibAdd:'Add as hajiz',ibPlus:function(a){return '+1 to '+a;},ibFail:'Couldn’t load reports. Try Refresh.',ibAdded:'Added. Publish to show riders.',ibDelFail:'Couldn’t delete the report. Try again.',sSbUrl:'Supabase URL',sSbKey:'Supabase anon key',sSbHint:'For reports. These are safe to be public.',ghTitle:'GitHub connection',ghHint:'To publish from here you need a GitHub token with Contents read and write access to this site’s repo only. It’s kept on this device only.',ghSave:'Save token',ghSaved:'Token saved',ghMissing:'Add a GitHub token below to publish.',ghBad:'The token is wrong or can’t write to the repo.',ghOk:'Saved. Riders see it in about a minute.',ghSet:'A token is saved on this device',ghClear:'Remove token',
     unsaved:'Unsaved changes. Riders see them after you publish.',publish:'Publish',publishing:'Publishing…',published:'Published',
     pConflict:'A newer version was saved first. Reloading; your edits can be restored.',pRO:'Publishing isn’t available in this view. Open the page from your own claude.ai account to save changes.',pRate:'Too many saves at once. Wait a minute, then publish again.',pFail:'Couldn’t publish. Try again in a moment.',restored:'Restored your unpublished changes'}
 };
@@ -317,7 +317,7 @@ function header(){
   if(s.channelLink)h+='<a class="btn" href="'+esc(s.channelLink)+'" target="_blank" rel="noopener">'+L('follow')+'</a>';
   if(s.whishNumber)h+='<button class="btn primary" data-act="donate">'+L('donate')+'</button>';
   h+='</div></div><nav class="tabs" role="tablist" style="--n:'+tabs.length+'">';
-  tabs.forEach(function(t){h+='<button class="tab disp'+(t[2]?' side':'')+'" role="tab" aria-selected="'+(view===t[0])+'" data-act="go" data-view="'+t[0]+'">'+t[1]+(t[0]==='current'&&cur?'<span class="count">'+cur+'</span>':'')+'</button>';});
+  tabs.forEach(function(t){h+='<button class="tab disp'+(t[2]?' side':'')+'" role="tab" aria-selected="'+(view===t[0])+'" data-act="go" data-view="'+t[0]+'">'+t[1]+(t[0]==='current'&&cur?'<span class="count">'+cur+'</span>':'')+(t[0]==='admin'&&inbox&&inbox.length?'<span class="count">'+inbox.length+'</span>':'')+'</button>';});
   return h+'</nav></div></header>';
 }
 
@@ -362,18 +362,28 @@ function viewOld(){
 function kindChoices(name,sel){return '<div class="choices">'+KINDS.map(function(k){return '<label class="choice"><input type="radio" name="'+name+'" id="'+name+'-'+k.k+'" value="'+k.k+'"'+(k.k===sel?' checked':'')+'><span>'+esc(k[lang])+'</span></label>';}).join('')+'</div>';}
 function areaList(){return '<datalist id="areas">'+AREAS[lang].map(function(a){return '<option value="'+esc(a)+'">';}).join('')+'</datalist>';}
 
+function sbOn(){var s=state.settings;return !!(GH&&s.sbUrl&&s.sbKey);}
+function sbBase(){return String(state.settings.sbUrl).replace(/\/+$/,'');}
+var reportSent=false;
 function viewReport(){
-  var h='<div class="sec-head"><h2 class="disp">'+L('rTitle')+'</h2></div>';
+  var h='<div class="sec-head"><h2 class="disp">'+L('rTitle')+'</h2></div>',useSb=sbOn();
   if(!loaded)return h+'<p class="loading">'+L('loading')+'</p>';
-  if(!state.settings.reportNumber)return h+'<div class="callout">'+L('rClosed')+'</div>';
-  h+='<form id="report-form" class="panel" novalidate>';
-  h+='<div class="field"><label for="rp-area">'+L('rWhere')+' <span class="hint">'+L('rArea')+'</span></label><input type="text" id="rp-area" list="areas" placeholder="'+L('rAreaPh')+'" autocomplete="off" required>'+areaList()+'</div>';
-  h+='<div class="grid2"><div class="field"><label for="rp-spot">'+L('rSpot')+'</label><input type="text" id="rp-spot" placeholder="'+L('rSpotPh')+'"></div><div class="field"><label for="rp-dir">'+L('rDir')+'</label><input type="text" id="rp-dir" placeholder="'+L('rDirPh')+'"></div></div>';
+  if(!useSb&&!state.settings.reportNumber)return h+'<div class="callout">'+L('rClosed')+'</div>';
+  if(reportSent)return h+'<div class="empty"><p class="big disp">'+L('rThanks')+'</p><p class="meta" style="margin:0">'+L('rThanksSub')+'</p><button class="btn" data-act="report-again">'+L('rAgain')+'</button></div>';
+  h+='<form id="report-form" class="panel" novalidate style="position:relative">';
+  h+='<div class="field"><label for="rp-area">'+L('rWhere')+' <span class="hint">'+L('rArea')+'</span></label><input type="text" id="rp-area" list="areas" placeholder="'+L('rAreaPh')+'" autocomplete="off" maxlength="80" required>'+areaList()+'</div>';
+  h+='<div class="grid2"><div class="field"><label for="rp-spot">'+L('rSpot')+'</label><input type="text" id="rp-spot" maxlength="120" placeholder="'+L('rSpotPh')+'"></div><div class="field"><label for="rp-dir">'+L('rDir')+'</label><input type="text" id="rp-dir" maxlength="120" placeholder="'+L('rDirPh')+'"></div></div>';
   h+='<div class="field"><span class="legend">'+L('rWhat')+'</span>'+kindChoices('rp-kind','trailer')+'</div>';
-  h+='<div class="field"><label for="rp-note">'+L('rNote')+' <span class="hint">'+L('optional')+'</span></label><input type="text" id="rp-note" placeholder="'+L('rNotePh')+'"></div>';
-  h+='<div class="field"><span class="legend">'+L('rMsg')+'</span><pre class="preview" id="rp-preview" dir="auto"></pre></div>';
-  h+='<div class="row"><a class="btn primary" id="rp-send" href="#" target="_blank" rel="noopener">'+L('rSend')+'</a><button type="button" class="btn" data-act="copy-report">'+L('rCopy')+'</button></div>';
-  h+='<p class="hint" style="margin:0">'+esc(L('rHint')('⁦'+state.settings.reportNumber+'⁩'))+'</p>';
+  h+='<div class="field"><label for="rp-note">'+L('rNote')+' <span class="hint">'+L('optional')+'</span></label><input type="text" id="rp-note" maxlength="300" placeholder="'+L('rNotePh')+'"></div>';
+  if(useSb){
+    h+='<input type="text" id="rp-web" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">';
+    h+='<p class="hint" id="rp-err" style="margin:0;color:var(--alert)" hidden></p>';
+    h+='<div class="row"><button type="submit" class="btn primary" id="rp-submit">'+L('rSubmit')+'</button></div>';
+  } else {
+    h+='<div class="field"><span class="legend">'+L('rMsg')+'</span><pre class="preview" id="rp-preview" dir="auto"></pre></div>';
+    h+='<div class="row"><a class="btn primary" id="rp-send" href="#" target="_blank" rel="noopener">'+L('rSend')+'</a><button type="button" class="btn" data-act="copy-report">'+L('rCopy')+'</button></div>';
+    h+='<p class="hint" style="margin:0">'+esc(L('rHint')('⁦'+state.settings.reportNumber+'⁩'))+'</p>';
+  }
   return h+'</form>';
 }
 function reportText(){
@@ -435,12 +445,67 @@ function adAdminRow(a){
   return h+'</div></article>';
 }
 
+var sbSess=null;try{sbSess=JSON.parse(ls('hw-sb')||'null');}catch(e){}
+var inbox=null,inboxErr='';
+function sbAuth(body,grant){
+  return fetch(sbBase()+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:state.settings.sbKey,'Content-Type':'application/json'},body:JSON.stringify(body)})
+  .then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j;});})
+  .then(function(j){sbSess={a:j.access_token,r:j.refresh_token,x:Date.now()+((j.expires_in||3600)-60)*1000};ls('hw-sb',JSON.stringify(sbSess));return sbSess;});
+}
+function sbDrop(){sbSess=null;ls('hw-sb',null);inbox=null;}
+function sbToken(){
+  if(!sbSess)return Promise.reject('nosess');
+  if(Date.now()<sbSess.x)return Promise.resolve(sbSess.a);
+  return sbAuth({refresh_token:sbSess.r},'refresh_token').then(function(x){return x.a;},function(){sbDrop();throw 'nosess';});
+}
+function sbAdmin(method,q){
+  return sbToken().then(function(tk){return fetch(sbBase()+'/rest/v1/reports'+q,{method:method,headers:{apikey:state.settings.sbKey,Authorization:'Bearer '+tk},cache:'no-store'});})
+  .then(function(r){if(r.status===401){sbDrop();throw 'nosess';}if(!r.ok)throw r.status;return method==='GET'?r.json():null;});
+}
+function loadInbox(){
+  if(!sbOn()||!sbSess||!authed)return;
+  sbAdmin('GET','?select=*&order=created_at.desc&limit=100').then(function(rows){inbox=rows||[];inboxErr='';refreshInbox();},function(e){inboxErr=e==='nosess'?'':L('ibFail');refreshInbox();});
+}
+function refreshInbox(){
+  if(view==='admin'){
+    var el=document.getElementById('inbox');if(el)el.outerHTML=inboxHTML();
+    var tb=document.querySelector('.tab[data-view="admin"]');if(tb)tb.innerHTML=L('admin')+(inbox&&inbox.length?'<span class="count">'+inbox.length+'</span>':'');
+  } else if(view!=='report')render();
+}
+function matchLive(area){var a=String(area||'').trim().toLowerCase(),r=null;currentList().forEach(function(it){if(!r&&String(it.area).trim().toLowerCase()===a)r=it;});return r;}
+function inboxHTML(){
+  if(!GH)return '<section id="inbox" hidden></section>';
+  var h='<section id="inbox" class="panel"><div class="sec-head"><h3 class="disp">'+L('ibTitle')+'</h3>';
+  if(!sbOn())return h+'</div><p class="meta" style="margin:0">'+L('ibNoSb')+'</p></section>';
+  if(!sbSess)return h+'</div><form id="sb-login" novalidate><p class="meta" style="margin:0">'+L('ibLogin')+'</p><div class="grid2"><div class="field"><label for="sb-email">'+L('ibEmail')+'</label><input type="text" id="sb-email" dir="ltr" autocomplete="username" inputmode="email"></div><div class="field"><label for="sb-pass">'+L('lPass')+'</label><input type="password" id="sb-pass" dir="ltr" autocomplete="current-password" style="width:100%;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-height:44px"></div></div><button type="submit" class="btn">'+L('ibLoginBtn')+'</button></form></section>';
+  h+='<div class="row"><button class="btn small" data-act="ib-refresh">'+L('ibRefresh')+'</button><button class="linkbtn" data-act="sb-logout">'+L('logout')+'</button></div></div>';
+  if(inboxErr)h+='<div class="callout">'+esc(inboxErr)+'</div>';
+  if(inbox===null)return h+'<p class="loading" style="padding:8px 0">'+L('loading')+'</p></section>';
+  if(!inbox.length)return h+'<p class="meta" style="margin:0">'+L('ibEmpty')+'</p></section>';
+  inbox.forEach(function(r){
+    var ts=Date.parse(r.created_at)||Date.now(),m=matchLive(r.area);
+    h+='<article class="card"><div class="card-top"><h3 class="area disp" style="font-size:22px">'+esc(r.area)+'</h3><span class="meta" data-ts="'+ts+'">'+ago(ts)+'</span></div>';
+    var w=whereLine({spot:r.spot,direction:r.direction});if(w)h+='<div class="where">'+esc(w)+'</div>';
+    h+='<div>'+esc(kindOf(r.kind)[lang])+'</div>';
+    if(r.note)h+='<div class="note">'+esc(r.note)+'</div>';
+    h+='<div class="actions"><button class="btn small primary" data-act="ib-add" data-rid="'+esc(r.id)+'">'+L('ibAdd')+'</button>';
+    if(m)h+='<button class="btn small" data-act="ib-plus" data-rid="'+esc(r.id)+'" data-target="'+m.id+'">'+esc(L('ibPlus')(m.area))+'</button>';
+    h+='<button class="btn small danger" data-act="ib-del" data-rid="'+esc(r.id)+'">'+L('bDel')+'</button></div></article>';
+  });
+  return h+'</section>';
+}
+function takeReport(rid){
+  var r=null;(inbox||[]).forEach(function(x){if(String(x.id)===rid)r=x;});
+  if(r){inbox=inbox.filter(function(x){return x!==r;});sbAdmin('DELETE','?id=eq.'+encodeURIComponent(rid)).catch(function(){toast(L('ibDelFail'));loadInbox();});}
+  return r;
+}
 function viewAdmin(){
   var s=state.settings;
   var h='<div class="sec-head"><h2 class="disp">'+L('aTitle')+'</h2><button class="linkbtn" data-act="logout">'+L('logout')+'</button></div>';
   if(readOnlyNote)h+='<div class="callout">'+esc(readOnlyNote)+'</div>';
   if(GH&&!ls('hw-gh-token'))h+='<div class="callout">'+L('ghMissing')+'</div>';
   if(!s.reportNumber||!s.whishNumber)h+='<div class="callout">'+L('aNeed')+'</div>';
+  h+=inboxHTML();
   h+=itemForm();
   var all=currentList().concat(oldList().slice(0,30));
   h+='<div class="sec-head"><h2 class="disp">'+L('aAll')+'</h2><span class="meta">'+currentList().length+' '+L('aLive')+' · '+oldList().length+' '+L('aOld')+'</span></div>';
@@ -458,6 +523,7 @@ function viewAdmin(){
   h+='<div class="grid2"><div class="field"><label for="st-whish">'+L('sWhish')+'</label><input type="tel" id="st-whish" dir="ltr" value="'+esc(s.whishNumber)+'"></div><div class="field"><label for="st-whishname">'+L('sWhishName')+'</label><input type="text" id="st-whishname" value="'+esc(s.whishName)+'"></div></div>';
   h+='<div class="field"><label for="st-channel">'+L('sChannel')+' <span class="hint">'+L('optional')+'</span></label><input type="url" id="st-channel" dir="ltr" value="'+esc(s.channelLink)+'" placeholder="https://whatsapp.com/channel/..."></div>';
   h+='<div class="field"><label for="st-stale">'+L('sStale')+'</label><input type="number" id="st-stale" min="1" max="48" dir="ltr" value="'+esc(s.staleHours)+'"></div>';
+  if(GH)h+='<div class="grid2"><div class="field"><label for="st-sburl">'+L('sSbUrl')+' <span class="hint">'+L('sSbHint')+'</span></label><input type="url" id="st-sburl" dir="ltr" value="'+esc(s.sbUrl)+'" placeholder="https://xxxx.supabase.co"></div><div class="field"><label for="st-sbkey">'+L('sSbKey')+'</label><input type="text" id="st-sbkey" dir="ltr" value="'+esc(s.sbKey)+'"></div></div>';
   h+='<button type="submit" class="btn primary">'+L('sApply')+'</button></form></details>';
   if(GH){
     var has=!!ls('hw-gh-token');
@@ -503,7 +569,7 @@ var armed=null;
 function twoTap(b,key,fn){if(armed===key){armed=null;fn();return;}armed=key;b.textContent=L('bDelSure');setTimeout(function(){if(armed===key){armed=null;b.textContent=L('bDel');}},3000);}
 document.addEventListener('click',function(e){
   var b=e.target.closest('[data-act]');if(!b)return;var a=b.getAttribute('data-act'),id=b.getAttribute('data-id'),adId=b.getAttribute('data-ad');
-  if(a==='go'){view=b.getAttribute('data-view');try{history.replaceState(null,'','#'+view);}catch(_){location.hash=view;}render();window.scrollTo(0,0);return;}
+  if(a==='go'){view=b.getAttribute('data-view');if(view==='admin')loadInbox();try{history.replaceState(null,'','#'+view);}catch(_){location.hash=view;}render();window.scrollTo(0,0);return;}
   if(a==='lang'){lang=lang==='ar'?'en':'ar';ls('hw-lang',lang);applyLang();render();return;}
   if(a==='theme'){var nt=isDark()?'light':'dark';document.documentElement.setAttribute('data-theme',nt);ls('hw-theme',nt);render();return;}
   if(a==='donate')return donate();
@@ -513,6 +579,12 @@ document.addEventListener('click',function(e){
   if(a==='publish')return save();
   if(a==='logout'){authed=false;ss('hw-admin',null);view='current';render();return;}
   if(a==='gh-clear'){ls('hw-gh-token',null);render();return;}
+  if(a==='report-again'){reportSent=false;render();return;}
+  if(a==='ib-refresh'){inbox=null;refreshInbox();loadInbox();return;}
+  if(a==='sb-logout'){sbDrop();refreshInbox();return;}
+  if(a==='ib-del'){var rd=b.getAttribute('data-rid');twoTap(b,'rep'+rd,function(){takeReport(rd);refreshInbox();});return;}
+  if(a==='ib-add'){var r1=takeReport(b.getAttribute('data-rid'));if(r1){state.items.unshift({id:uid(),area:r1.area,spot:r1.spot||'',direction:r1.direction||'',kind:r1.kind||'other',status:'confirmed',reportedAt:Date.parse(r1.created_at)||Date.now(),reports:1,note:r1.note||'',clearedAt:null});toast(L('ibAdded'));changed();}return;}
+  if(a==='ib-plus'){var tg=find(b.getAttribute('data-target')),r2=takeReport(b.getAttribute('data-rid'));if(tg&&r2){tg.reports=(tg.reports||1)+1;if(tg.status==='unconfirmed')tg.status='confirmed';toast(L('ibAdded'));changed();}else refreshInbox();return;}
   if(a==='cancel-edit'){editingId=null;render();return;}
   if(a==='ad-cancel'){editingAd=null;pendingImg=undefined;render();return;}
   if(a==='ad-ph'){state.settings.adPlaceholder=b.checked;changed();return;}
@@ -559,9 +631,27 @@ document.addEventListener('submit',function(e){
   if(f.id==='login-form'){
     var err=document.getElementById('lg-err');
     sha256hex(document.getElementById('lg-pass').value).then(function(hx){
-      if(hx===PASS_HASH){authed=true;ss('hw-admin','1');render();checkStash();}
+      if(hx===PASS_HASH){authed=true;ss('hw-admin','1');render();checkStash();loadInbox();}
       else{err.textContent=L('lWrong');err.hidden=false;}
     },function(){err.textContent=L('lNoCrypto');err.hidden=false;});
+    return;
+  }
+  if(f.id==='report-form'&&sbOn()){
+    var er=document.getElementById('rp-err'),btn=document.getElementById('rp-submit'),ar=g('rp-area');
+    var showErr=function(m){er.textContent=m;er.hidden=false;};
+    if(!ar){document.getElementById('rp-area').focus();showErr(L('aAreaFirst'));return;}
+    if(g('rp-web')){reportSent=true;render();return;}
+    var last=+(ls('hw-last-report')||0);if(Date.now()-last<60000){showErr(L('rWait'));return;}
+    var kk=document.querySelector('input[name="rp-kind"]:checked');
+    var rec={area:ar.slice(0,80),spot:g('rp-spot').slice(0,120),direction:g('rp-dir').slice(0,120),kind:kk?kk.value:'other',note:g('rp-note').slice(0,300),lang:lang};
+    btn.disabled=true;btn.textContent=L('rSending');er.hidden=true;
+    fetch(sbBase()+'/rest/v1/reports',{method:'POST',headers:{apikey:state.settings.sbKey,Authorization:'Bearer '+state.settings.sbKey,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(rec)})
+    .then(function(r){if(!r.ok)throw r.status;ls('hw-last-report',String(Date.now()));reportSent=true;render();window.scrollTo(0,0);})
+    .catch(function(){btn.disabled=false;btn.textContent=L('rSubmit');showErr(L('rFail'));});
+    return;
+  }
+  if(f.id==='sb-login'){
+    sbAuth({email:g('sb-email'),password:document.getElementById('sb-pass').value},'password').then(function(){inbox=null;refreshInbox();loadInbox();},function(){toast(L('ibLoginBad'));});
     return;
   }
   if(f.id==='gh-form'){var tk=g('gh-token');if(tk){ls('hw-gh-token',tk);toast(L('ghSaved'));render();}return;}
@@ -587,7 +677,7 @@ document.addEventListener('submit',function(e){
   }
   if(f.id==='settings-form'){
     var s=state.settings;s.name=g('st-name')||DEF.name;s.nameAr=g('st-namear')||DEF.nameAr;s.reportNumber=g('st-report');s.whishNumber=g('st-whish');s.whishName=g('st-whishname');
-    s.channelLink=safeLink(g('st-channel'));s.staleHours=Math.min(48,Math.max(1,parseInt(g('st-stale'),10)||2));
+    s.channelLink=safeLink(g('st-channel'));if(document.getElementById('st-sburl')){s.sbUrl=safeLink(g('st-sburl'));s.sbKey=g('st-sbkey');}s.staleHours=Math.min(48,Math.max(1,parseInt(g('st-stale'),10)||2));
     toast(L('sApplied'));changed();return;
   }
 });
@@ -643,7 +733,7 @@ function checkStash(){
 function loadData(first){
   if(!GH)return;
   fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
-    if(dirty)return;state=normalize(d);loaded=true;render();if(first)checkStash();
+    if(dirty)return;state=normalize(d);loaded=true;render();if(first){checkStash();loadInbox();}
   }).catch(function(){if(!loaded){loaded=true;render();}});
 }
 function initCaps(){
@@ -668,6 +758,7 @@ setInterval(function(){
   if(view==='current'||view==='old'){if(GH)loadData(false);else render();}
   else document.querySelectorAll('[data-ts]').forEach(function(el){el.textContent=ago(+el.getAttribute('data-ts'));});
 },60000);
+setInterval(function(){if(view==='admin')loadInbox();},30000);
 setInterval(function(){
   var slot=document.getElementById('adslot');if(!slot)return;if(activeAds().length<2)return;adIndex++;slot.innerHTML=adInner();
 },7000);

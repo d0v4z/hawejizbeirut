@@ -19,3 +19,14 @@ Live alerts for moto riders in Beirut: where the hawajiz are right now, a form t
 ## Security note
 
 The admin password only hides the admin screen. Because this is a public static site, its hash sits in the page source. What actually protects your data is the GitHub token: without it, nobody can change `data.json`. Never share the token, and revoke it on GitHub if a phone with it saved is lost.
+
+## Reports inbox (optional)
+
+Without this, the Report tab sends riders to WhatsApp. With it, reports land in the admin panel.
+
+1. Create a free project at supabase.com.
+2. Authentication → Users → **Add user**: your email and a password. This is your admin login for reports.
+3. SQL Editor → New query → paste `supabase.sql`, replace `YOUR_EMAIL@example.com` with that email, and run it.
+4. Project Settings → API (or Data API): copy the **Project URL** and the **anon public** key.
+5. On the site: الإدارة → الإعدادات → paste both into **Supabase URL** and **Supabase anon key** → Apply → Publish.
+6. In the admin panel, sign in under **التبليغات** with the email and password from step 2.
