@@ -12,6 +12,18 @@
  },
  "items": [
   {
+   "area": "Kaskas",
+   "spot": "Male3ib kaskas",
+   "direction": "Tayouneh",
+   "kind": "trailer",
+   "status": "confirmed",
+   "reportedAt": 1793596680000,
+   "reports": 3,
+   "note": "Fi 2 blata 3m yhamlo motoyet w mfawal baladeye w istiqsa",
+   "id": "mvyt7npuehyv",
+   "clearedAt": null
+  },
+  {
    "area": "Tayouneh",
    "spot": "3al dowar",
    "direction": "Ghobeiry",
@@ -36,5 +48,5 @@
    "clearedAt": 1793595878837
   }
  ],
- "updatedAt": 1793596306465
+ "updatedAt": 1793596779826
 }
